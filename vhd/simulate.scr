@@ -1,0 +1,197 @@
+#source ./compile.scr
+
+quit -sim
+
+vsim -t ps work.tb_dlx
+
+add wave -hexadecimal clock
+add wave -hexadecimal reset
+add wave -binary irq_line_s
+add wave -binary ack_line_s
+add wave -hexadecimal debug
+add wave -hexadecimal U1/control_unit/dbg_step
+add wave -hexadecimal crash
+
+add wave -hexadecimal U1/control_unit/FETCH_EN
+add wave -hexadecimal U1/control_unit/DECODE_EN
+add wave -hexadecimal U1/control_unit/EXECUTION_EN
+add wave -hexadecimal U1/control_unit/MEMORY_EN
+add wave -hexadecimal U1/control_unit/WRITEBACK_EN
+
+add wave -binary U1/control_unit/cw
+add wave -binary U1/control_unit/cw1
+add wave -binary U1/control_unit/cw2
+add wave -binary U1/control_unit/cw3
+add wave -binary U1/control_unit/cw4
+
+add wave -binary U1/control_unit/ecp_cause_e4_add_out
+add wave -binary U1/control_unit/ecp_cause_de_out
+add wave -binary U1/control_unit/ecp_cause_em_in
+add wave -binary U1/control_unit/ecp_cause_em_out
+
+
+add wave -hexadecimal U1/control_unit/int_pipe
+add wave -hexadecimal U1/control_unit/mul_pipe
+add wave -hexadecimal U1/control_unit/add_pipe
+
+add wave -binary U1/control_unit/mul_stages
+add wave -binary U1/control_unit/add_stages
+
+add wave u1/ecp_code_s
+add wave u1/irq_code_s
+
+add wave -hexadecimal U1/control_unit/ecp_flush_s
+add wave -hexadecimal U1/control_unit/irq_detected_s
+add wave -hexadecimal U1/control_unit/ecp_lock_n
+
+add wave -hexadecimal clock
+
+add wave -hexadecimal U1/data_path/IR_CLEAR_D
+add wave -hexadecimal U1/data_path/IR_CLEAR_E
+add wave -hexadecimal U1/data_path/IR_CLEAR_M
+add wave -hexadecimal U1/data_path/IR_CLEAR_W
+add wave -hexadecimal U1/data_path/IR_CLEAR_EX_INT
+add wave -hexadecimal U1/data_path/IR_CLEAR_EX_MUL
+add wave -hexadecimal U1/data_path/IR_CLEAR_EX_ADD
+
+add wave -unsigned U1/control_unit/jump_mux_sel
+add wave -unsigned U1/data_path/PC_i
+add wave -unsigned U1/data_path/PC_bus
+add wave -unsigned U1/data_path/NPC_bus
+add wave -unsigned U1/data_path/EPC_bus
+
+add wave -unsigned U1/control_unit/IR_opcode
+add wave -hexadecimal U1/control_unit/IR_IN
+add wave -hexadecimal U1/control_unit/IR_d
+add wave -hexadecimal U1/control_unit/IR_e
+add wave -hexadecimal U1/control_unit/IR_E1_MUL
+add wave -hexadecimal U1/control_unit/IR_E2_MUL
+add wave -hexadecimal U1/control_unit/IR_E3_MUL
+add wave -hexadecimal U1/control_unit/IR_E1_ADD
+add wave -hexadecimal U1/control_unit/IR_E2_ADD
+add wave -hexadecimal U1/control_unit/IR_E3_ADD
+add wave -hexadecimal U1/control_unit/IR_E4_ADD
+add wave -hexadecimal U1/control_unit/IR_m
+
+add wave -hexadecimal U1/control_unit/IR_MUX_SEL
+add wave -hexadecimal U1/control_unit/ALU_OP
+add wave -hexadecimal U1/control_unit/BRANCH_OP
+
+add wave -hexadecimal U1/control_unit/ecp_pipe_rst
+add wave -hexadecimal U1/control_unit/irq_pipe_rst
+
+add wave -binary U1/control_unit/ecp_cause_fd_out
+add wave -binary U1/control_unit/ecp_cause_de_out
+add wave -binary U1/control_unit/ecp_cause_em_out
+add wave -binary U1/control_unit/ecp_cause_s
+
+add wave -hexadecimal clock
+
+add wave -hexadecimal U1/data_path/stage_e_int_en
+add wave -hexadecimal U1/data_path/stage_e1_mul_en
+add wave -hexadecimal U1/data_path/stage_e2_mul_en
+add wave -hexadecimal U1/data_path/stage_e3_mul_en
+add wave -hexadecimal U1/data_path/stage_e1_add_en
+add wave -hexadecimal U1/data_path/stage_e2_add_en
+add wave -hexadecimal U1/data_path/stage_e3_add_en
+add wave -hexadecimal U1/data_path/stage_e4_add_en
+
+add wave -hexadecimal U1/control_unit/BR_FWD_MUX_SEL
+add wave -hexadecimal U1/control_unit/ST_FWD_MUX_SEL
+
+add wave -hexadecimal U1/control_unit/SPILL
+add wave -hexadecimal U1/control_unit/FILL
+add wave -hexadecimal U1/control_unit/fill_delay_s
+
+add wave -hexadecimal U1/control_unit/call_s
+add wave -hexadecimal U1/control_unit/ret_s
+
+add wave -hexadecimal U1/control_unit/CALL_ROLLBACK
+add wave -hexadecimal U1/control_unit/RET_ROLLBACK
+add wave -hexadecimal U1/control_unit/cwp_enable_s
+
+add wave -hexadecimal clock
+
+add wave -hexadecimal U1/control_unit/FP_INTn_RD1
+add wave -hexadecimal U1/control_unit/FP_INTn_RD2
+add wave -hexadecimal U1/control_unit/MUX_IMM_SEL
+
+add wave -hexadecimal U1/control_unit/MUXA_SEL
+add wave -hexadecimal U1/control_unit/MUXB_SEL
+add wave -hexadecimal U1/control_unit/PUSH_POP_MUX_SEL
+add wave -hexadecimal U1/control_unit/RF_WE_SP
+
+add wave -hexadecimal U1/control_unit/DRAM_CS
+add wave -hexadecimal U1/control_unit/DRAM_R_W
+add wave -hexadecimal U1/control_unit/LOAD_MUX_SEL
+add wave -hexadecimal U1/control_unit/WR_MUX_SEL
+
+add wave -hexadecimal U1/control_unit/RF_WE
+add wave -hexadecimal U1/control_unit/FP_INTn_WR
+add wave -hexadecimal U1/control_unit/WB_MUX_SEL
+
+add wave -hexadecimal U1/control_unit/RF_EN
+add wave -hexadecimal U1/control_unit/BRANCH_DETECTED
+add wave -hexadecimal U1/control_unit/RF_WE_SR
+add wave -hexadecimal U1/control_unit/DRAM_ADDRESS
+add wave -hexadecimal U1/control_unit/EPC_EN
+add wave -hexadecimal U1/control_unit/ECP_CODE
+
+add wave -hexadecimal clock
+
+add wave -hexadecimal U1/data_path/WRF/cwp
+add wave -hexadecimal U1/dma_c/swp_s
+add wave -unsigned U1/data_path/WRF/ADD_RD1
+add wave -unsigned U1/data_path/WRF/ADD_RD2
+add wave -unsigned U1/data_path/WRF/add_rd1_ph
+add wave -unsigned U1/data_path/WRF/add_rd2_ph
+add wave -unsigned U1/data_path/RF_out1
+add wave -unsigned U1/data_path/RF_out2
+add wave -hexadecimal U1/data_path/RegA_out
+add wave -hexadecimal U1/data_path/RegB_out
+add wave -unsigned U1/data_path/ADD_WR_RF
+add wave -hexadecimal U1/data_path/WRF/datain
+
+add wave -hexadecimal clock
+
+add wave -hexadecimal U1/data_path/ALU_in1
+add wave -hexadecimal U1/data_path/ALU_in2
+add wave -hexadecimal U1/data_path/ALU_OUT_SEL
+add wave -hexadecimal U1/data_path/ALU_out
+add wave -hexadecimal U1/data_path/ALU_REG_OUT
+add wave -hexadecimal U1/data_path/alu_out_delayed
+add wave -hexadecimal U1/data_path/alu_ovf
+add wave -hexadecimal U1/data_path/alu_ufl
+add wave -hexadecimal U1/data_path/alu_carry
+add wave -hexadecimal U1/data_path/alu_zero
+add wave -hexadecimal U1/data_path/alu_invalid_conv
+
+add wave -hexadecimal U1/data_path/DRAM_REG_out
+
+
+add wave -unsigned U1/data_path/WRF/registers_int
+add wave -hexadecimal U1/data_path/WRF/registers_fp
+
+add wave -unsigned U1/dram_addr_s
+add wave -hexadecimal U1/dram_in_s
+add wave -hexadecimal U1/dram_out_s
+add wave -hexadecimal U1/inst_ram/iram_mem
+add wave -hexadecimal U1/data_ram/mem
+
+set NumericStdNoWarnings 1
+run 0 ns
+set NumericStdNoWarnings 0
+
+run 10 ns
+#debug
+#force -freeze sim:/tb_dlx/debug 1 0 -cancel {10 ns}
+
+#interrupts
+#force -freeze sim:/tb_dlx/irq_line_s 00001000 0 -cancel {20 ns}
+#force -freeze sim:/tb_dlx/irq_line_s 10100000 0 -cancel {20 ns}
+#run 20 ns
+#force -freeze sim:/tb_dlx/irq_line_s 00100000 0 -cancel {20 ns}
+#run 30 ns
+
+#radix -hexadecimal
+config wave -signalnamewidth 1

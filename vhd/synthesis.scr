@@ -1,0 +1,95 @@
+
+# Synthesis script #
+##############################################################
+############################ DLX #############################
+#analysis
+
+analyze -library WORK -format vhdl {00-package/000-globals.vhd}
+analyze -library WORK -format vhdl {02-basic_components/00_fa.vhd}
+analyze -library WORK -format vhdl {02-basic_components/01-mux2to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/01_rca_gen.vhd}
+analyze -library WORK -format vhdl {02-basic_components/02_CarrySelectAdder.vhd}
+analyze -library WORK -format vhdl {02-basic_components/02-mux3to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/02-mux4to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/03-carry_save_adder.vhd}
+analyze -library WORK -format vhdl {02-basic_components/03-mux5to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/04-cla.vhd}
+analyze -library WORK -format vhdl {02-basic_components/04-mux6to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/04-mux7to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/04-mux8to1.vhd}
+analyze -library WORK -format vhdl {02-basic_components/down_counter.vhd}
+analyze -library WORK -format vhdl {02-basic_components/up_counter.vhd}
+analyze -library WORK -format vhdl {02-basic_components/up_down_counter.vhd}
+analyze -library WORK -format vhdl {02-basic_components/flip_flop.vhd}
+analyze -library WORK -format vhdl {02-basic_components/flip_flop_load.vhd}
+analyze -library WORK -format vhdl {02-basic_components/SIPO_shift_register.vhd}
+analyze -library WORK -format vhdl {02-basic_components/register.vhd}
+analyze -library WORK -format vhdl {02-basic_components/register_clear.vhd}
+analyze -library WORK -format vhdl {02-basic_components/latch.vhd}
+analyze -library WORK -format vhdl {02-basic_components/pulse_gen.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/00_g_block.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/00_pg_block.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/01_pg_network.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/03_carry_generator.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/03_sum_generator.vhd}
+analyze -library WORK -format vhdl {03-p4_adder/04_p4_adder.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/00-sign_extension.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/01-booth_encoder.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/02-ppg.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/03-wallaceTree.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/04-mult.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/05-exponent.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/06-increment.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/07-rounding.vhd}
+analyze -library WORK -format vhdl {04-pipelined_mult/08-FP_mult.vhd}
+analyze -library WORK -format vhdl {05-pipelined_FP_adder/01-sign_eval.vhd}
+analyze -library WORK -format vhdl {05-pipelined_FP_adder/02-shift_right.vhd}
+analyze -library WORK -format vhdl {05-pipelined_FP_adder/03-Normalization.vhd}
+analyze -library WORK -format vhdl {05-pipelined_FP_adder/04-adder_rounding.vhd}
+analyze -library WORK -format vhdl {05-pipelined_FP_adder/05-FP_adder.vhd}
+analyze -library WORK -format vhdl {a.a.a-interrupt_arbiter.vhd}
+analyze -library WORK -format vhdl {a.a.c-ECP_decoder.vhd}
+analyze -library WORK -format vhdl {a.a.b-mem_ecp_checker.vhd}
+analyze -library WORK -format vhdl {a.a-CU_HW.vhd}
+analyze -library WORK -format vhdl {a.b.a-Windowed_Register_File.vhd}
+analyze -library WORK -format vhdl {a.b.c.a-Logicals.vhd}
+analyze -library WORK -format vhdl {a.b.c-ALU.vhd}
+analyze -library WORK -format vhdl {a.b.c.b-shifter.vhd}
+analyze -library WORK -format vhdl {a.b.c.d-comparator.vhd}
+analyze -library WORK -format vhdl {a.b.c.e-int2fp_converter.vhd}
+analyze -library WORK -format vhdl {a.b.c.f-fp2int_converter.vhd}
+analyze -library WORK -format vhdl {a.b-DataPath.vhd}
+analyze -library WORK -format vhdl {a.b.d-ECP_LUT.vhd}
+analyze -library WORK -format vhdl {a.b.e-NPC_adder.vhd}
+analyze -library WORK -format vhdl {a.b.f-Imm_Extension.vhd}
+analyze -library WORK -format vhdl {a.b.g-Branch.vhd}
+analyze -library WORK -format vhdl {a.b.h-PUSH_POP_adder.vhd}
+analyze -library WORK -format vhdl {a.e-DMA.vhd}
+analyze -library WORK -format vhdl {a-DLX-FS.vhd}
+
+##############################################################
+# elaborating the top entity
+elaborate DLX_fs -architecture dlx_rtl -library WORK
+##########################################
+
+# Add clock #
+create_clock -name "CLK" -period 2.4 Clk
+report_clock > reports/clock2.4.rpt
+
+# Add constraints #
+set_max_delay 2.4 -from [all_inputs] -to [all_outputs]
+
+compile -exact_map -map_effort HIGH -gate_clock
+
+#vhdl post-synthesis netlist
+write -hierarchy -format ddc -output design/dlx-fs-clock2.4.ddc
+write -hierarchy -format vhdl -output netlist/dlx-fs-clock2.4.vhdl
+write -hierarchy -format verilog -output netlist/dlx-fs-clock2.4.v
+# save reports
+report_timing -path full -delay max -nworst 1 -max_paths 1 -significant_digits 2 -sort_by slack > reports/dlx-fs-timing-clock2.4.rpt
+report_area > reports/dlx-fs-area-clock2.4.rpt
+report_power > reports/dlx-fs-power-clock2.4.rpt
+
+#############################################################
+#quit
+#############################################################
