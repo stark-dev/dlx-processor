@@ -1,0 +1,4 @@
+#!/bin/bash
+
+od --width=1 -t xC -v $1 | awk '{print $2}'
+

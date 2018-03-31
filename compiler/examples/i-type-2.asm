@@ -1,0 +1,31 @@
+.mode dbg
+.text
+seqi r5,r1,#1
+seqi r5,r1,#2
+snei r5,r1,#2
+snei r5,r1,#1
+slti r6,r2,#256
+slti r6,r2,#255
+slti r6,r2,#254
+sltui r6,r3,#1
+sltui r6,r1,#1
+sltui r6,r1,#4
+sgti r7,r1,#0
+sgti r7,r1,#1
+sgti r7,r1,#2
+sgtui r7,r3,#0
+sgtui r7,r2,#0
+sgtui r7,r2,#255
+slei r8,r1,#1
+slei r8,r1,#0
+slei r8,r1,#-1
+sleui r8,r1,#1
+sleui r8,r1,#2
+sleui r8,r1,#0
+sgei r9,r1,#2
+sgei r9,r1,#1
+sgei r9,r1,#0
+sgeui r9,r24,#1
+sgeui r9,r24,#0
+sgeui r9,r1,#0
+
